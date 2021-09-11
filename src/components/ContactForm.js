@@ -1,12 +1,23 @@
 import React, { useState, useEffect } from "react";
 
 const ContactForm = (props) => {
+//  var bednum=Math.floor(Math.random()*10)+1;
+
+const [bednum,currentbednum] = useState(11);
+
     const initialFieldValues = {
         fullName: '',
         mobile: '',
         email: '',
-        address: ''
+        address: '',
+        AssignedDoctor: 'None',
+        HearBeat: '72',
+        Oxyen: '99',
+        EMERGENCY: 'None',
+        Call: 'None',
+        bed:bednum,
     }
+
 
     var [values, setValues] = useState(initialFieldValues)
 
@@ -15,6 +26,7 @@ const ContactForm = (props) => {
             setValues({
                 ...initialFieldValues
             })
+
         else
             setValues({
                 ...props.contactObjects[props.currentId]
@@ -30,9 +42,18 @@ const ContactForm = (props) => {
     }
     const handleFormSubmit = e => {
         e.preventDefault();
+       
         props.addOrEdit(values)
     }
-
+    
+    const handleclick=()=>{
+        currentbednum(bednum-1) 
+        if(bednum<=0){
+            alert("No Beds Available")
+            }
+    }
+   
+    
     return (
         <form autoComplete="off" onSubmit={handleFormSubmit}>
             <div className="form-group input-group">
@@ -77,10 +98,11 @@ const ContactForm = (props) => {
                 />
             </div>
             <div className="form-group">
-                <input type="submit" value={props.currentId == '' ? "Save" : "Update"} className="btn btn-primary btn-block" />
+                <input type="submit" onClick={handleclick} value={props.currentId == '' ? "Save" : "Update"} className="btn btn-primary btn-block" />
             </div>
         </form >
     );
+  
 }
 
 export default ContactForm;

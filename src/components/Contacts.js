@@ -67,23 +67,47 @@ const Contacts = () => {
                 <div className="col-md-5">
                     <ContactForm {...({ addOrEdit, currentId, contactObjects })} />
                 </div>
-                <div className="col-md-7">
+                <div className="col-md-10">
                     <table className="table table-borderless table-stripped">
                         <thead className="thead-light">
                             <tr>
                                 <th>Full Name</th>
+                                <th>Bed Number</th>
+
                                 <th>Mobile</th>
-                                <th>Email</th>
+                                <th>address</th>
+                                <th>AssignedDoctor</th>
+                                <th>HearBeat</th>
+                                <th>Oxyen</th>
+                                <th>EMERGENCY</th>
+                                <th>Call</th>
+
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             {
                                 Object.keys(contactObjects).map(id => {
+                                    if (contactObjects[id].HearBeat <= 68) {
+                                        return (
+                                <div>
+<h1>HearBeat:{contactObjects[id].HearBeat} Name:{contactObjects[id].fullName}</h1>                                     
+                                </div>
+                                            )
+
+                                    }
                                     return <tr key={id}>
                                         <td>{contactObjects[id].fullName}</td>
+                                        <td>{contactObjects[id].bed}</td>
+
                                         <td>{contactObjects[id].mobile}</td>
-                                        <td>{contactObjects[id].email}</td>
+                                        <td>{contactObjects[id].address}</td>
+                                        <td>{contactObjects[id].AssignedDoctor}</td>
+                                        <td>{contactObjects[id].HearBeat}</td>
+                                        <td>{contactObjects[id].Oxyen}</td>
+                                        <td>{contactObjects[id].EMERGENCY}</td>
+                                        <td>{contactObjects[id].Call}</td>
+
                                         <td>
                                             <a className="btn text-primary" onClick={() => { setCurrentId(id) }}>
                                                 <i className="fas fa-pencil-alt"></i>
